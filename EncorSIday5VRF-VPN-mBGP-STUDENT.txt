@@ -605,10 +605,10 @@ configure terminal
 
 ***
 
-isp1-pnbB:
+isp1-BPiBGC:
 enable
 configure terminal
- hostname PNBb
+ hostname BPIbgc
  enable secret pass
  no ip domain-lookup
  logging console
@@ -625,7 +625,7 @@ configure terminal
 D2-BPIa:
 enable
 configure terminal
- hostname D2-BPIa
+ hostname D2-PNBala
  enable secret pass
  no ip domain-lookup
  logging console
@@ -638,7 +638,7 @@ configure terminal
 
 ISp2-BPIB:
 configure terminal
- hostname I2BPIb
+ hostname I2PNBBgc
  enable secret pass
  no ip domain-lookup
  logging console
@@ -703,13 +703,13 @@ config t
  ip cef
  mpls ip
   int Ethernet1/1
-_____________
-_____________
-_____________
+    mpls ip
+    mpls label protocol ldp
+    !mpls mtu override 1512
   int Ethernet1/2
-_____________
-_____________
-_____________
+    mpls ip
+    mpls label protocol ldp
+    !mpls mtu override 1512
 ****
 ***
 R2:P:
@@ -721,18 +721,18 @@ config t
     mpls label protocol ldp
     !mpls mtu override 1512
   int Ethernet1/2
-_____________
-_____________
-_____________
+    mpls ip
+    mpls label protocol ldp
+    !mpls mtu override 1512
 ****
 R1-1:PEz
 config t
  ip cef
  mpls ip
   int Ethernet1/0
-_____________
-_____________
-_____________
+    mpls ip
+    mpls label protocol ldp
+    !mpls mtu override 1512
 
 How to check:
 R2P#show mpls ldp neighbor (lib)
@@ -1015,13 +1015,13 @@ IGP CONFIGURATION ON CLINETS: PE engineers talk with CE eng.
 CE engineers will do this!
 
 ****
-On all PNB(eigrp) routers:
+On all BPI(eigrp) routers:
 config t
  router eigrp 90
   network 10.0.0.0
   no auto-summary
 ****
-On all BPI(ospf) routers:
+On all PNB(ospf) routers:
 config t
  no router ospf 1
  router ospf 69
